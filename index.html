@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+	<h1>Santa Lucia Rx</h1>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">,Aspect,FBFM13,FBFM40,Slope Class,Soil Type,WHR Name (Veg),CNDDB,MoCo Zoning,SBCo Zoning,SRA,HAZ_CLASS,Shape_Length,Shape_Area,acres
+0,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,61.955462078460165,59.260705098207744,0.0094413
+1,East,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,77.27281588859331,48.51045399316483,0.0077285
+2,East,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,77.27281588457302,48.51045399055377,0.0077285
+3,East,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,79.75387995870734,94.82525533730924,0.0151073
+4,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,228.2940155183971,2806.478629828976,0.4471216
+5,East,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,537.1792697769013,7997.580036101437,1.2741604
+6,North,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.989628779200984,21.48822832763502,0.0034235
+7,North,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,86.59420034155195,294.52571771281646,0.0469242
+8,North,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,91.40993744478976,310.99254999218755,0.0495477
+9,Northwest,FBFM4,SH7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,9.145202009498483,3.571257326107788,0.000569
+10,Northwest,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,116.67314182271917,693.2742314013494,0.1104531
+11,West,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,80.73096872036889,255.207310860801,0.0406609
+12,West,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,28.325942816704416,30.682612635301385,0.0048885
+13,West,FBFM9,TL7,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,66.92955489790711,228.1949036786909,0.0363572
+14,Northwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,224.21808295736844,2791.748582579971,0.444798
+15,North,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,460.1100219656212,1629.3368258978455,0.2595891
+16,North,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,149.4460105697982,1395.881257281344,0.2223947
+17,North,FBFM10,TU5,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,331.4108858409501,2894.9172663920444,0.4612266
+18,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,1491.005890830006,41540.403368726176,6.6183605
+19,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,123.97516226058389,986.1261549415882,0.1571171
+20,East,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,224.11838866807403,1780.543628875119,0.2836896
+21,Northwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.98902493707112,21.485977640023176,0.0034232
+22,Northwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,86.18095359021564,293.7469768446431,0.0468004
+23,Northwest,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,91.40943555599453,310.98454972647744,0.0495467
+24,North,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,137.8929843624311,1158.6497281418633,0.1845986
+25,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,224.22031026307664,1633.161710981617,0.2602003
+26,East,FBFM4,SH7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,1.735085608984623,0.081254450278527,1.29e-05
+27,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,149.44654018945687,1395.8911550553546,0.2223994
+28,North,FBFM4,SH7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,31.969162233988794,51.9631811991632,0.0082788
+29,North,FBFM9,TL7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,38.10145338679763,67.40905246945451,0.0107398
+30,North,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,219.14777004784327,2318.5235357248016,0.3693957
+31,North,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,422.7777216825265,4829.269143151936,0.7694076
+32,North,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,296.62401236362086,1422.745225448502,0.2266741
+33,North,FBFM10,TU5,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,86.35077184731156,290.09849412373393,0.0462194
+34,Southeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,72.09181484574835,247.98801462902924,0.0395105
+35,Southeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,12.72445567527825,7.606351310938894,0.0012119
+36,North,FBFM9,TL7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,88.07917239743854,304.564475494891,0.0485258
+37,North,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,211.26208982511287,734.0149962535811,0.1169493
+38,North,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,177.81281993713196,1596.5714012995993,0.2543828
+39,North,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,147.62197458489067,1357.3091004442008,0.2162609
+40,North,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,152.73986745315509,402.70011647465094,0.0641624
+41,North,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,91.42241238213576,311.26426273184734,0.0495943
+42,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,368.6962363653309,5177.5527174829385,0.8249571
+43,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,132.41039076092255,1072.6329570345242,0.1709092
+44,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,62.45980809023336,118.46954849740563,0.0188763
+45,North,FBFM8,TL3,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.710246902365828,21.071796099384624,0.0033574
+46,North,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,91.41753900261033,311.17427489824786,0.04958
+47,North,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,196.74022604770627,1474.1643619251226,0.2348815
+48,North,FBFM5,GS2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,93.03969104361232,445.0189153427308,0.0709061
+49,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,42.431124710174856,91.27313908564071,0.0145428
+50,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,451.6685113805306,8574.7558430801,1.3662593
+51,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,149.4409473673939,1395.786678522352,0.2223991
+52,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,19.15923679876675,15.564883201751694,0.00248
+53,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,47.31784908115012,118.75885721445488,0.0189226
+54,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,41.427664360827485,105.24301862256787,0.0167691
+55,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,51.15722423479818,168.77637841562228,0.0268922
+56,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,89.07240714181326,369.6708051518428,0.0589022
+57,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,47.24397039197628,136.79059495626967,0.0217957
+58,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,136.85134363857412,1033.5819718842179,0.1646692
+59,Northeast,FBFM7,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,10.638371182492127,4.832592323129157,0.0007699
+60,Northeast,FBFM7,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,132.34764238874538,844.8835017887914,0.1346059
+61,Northeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,61.82572870782301,215.61106452771423,0.0343504
+62,Northeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,149.98087257975007,834.6251393091057,0.1329696
+63,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,133.30699779162612,1014.9481244960696,0.1616981
+64,Northeast,FBFM9,TL9,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,67.07613843258227,99.64343714170275,0.0158748
+65,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,49.35015101415584,104.21388141788374,0.016603
+66,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,133.12730969260295,246.17884489624063,0.0392206
+67,Northeast,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,14.345424574623868,8.795160950233736,0.0014012
+68,Northeast,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.338908995422763,17.592464160270776,0.0028028
+69,Northeast,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,20.331381416257013,25.55739801766464,0.0040719
+70,Northeast,FBFM4,SH7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,185.95644356466207,697.4380804763028,0.1111188
+71,Northeast,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,7.287342661173343,1.784854781704743,0.0002844
+72,Northeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,97.56824301857888,323.29355071360635,0.0515071
+73,Northeast,FBFM4,SH7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,132.79677452673644,1001.6567528510489,0.1595914
+74,Northeast,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,52.929544523587786,83.00230254214966,0.0132246
+75,Northeast,FBFM9,TL7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,511.12925417232185,3449.5524109407015,0.5496013
+76,Northeast,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,1065.6483078761096,9979.709347305172,1.5899996
+77,Northeast,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,293.81044616125394,3781.795612038896,0.6025167
+78,Northeast,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,215.01256219062145,534.2231098472355,0.0851133
+79,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,336.4350411280837,2215.186222949651,0.3529241
+80,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,19.84578567112901,24.46517451273535,0.0038979
+81,Northeast,FBFM10,TU5,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,152.33049853496578,1019.6339762984863,0.1624512
+82,Northeast,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,149.44574330797968,1322.3383368171035,0.2106804
+83,Northeast,FBFM10,TU5,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,217.69153770570523,1963.8847049720373,0.3128898
+84,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,2131.37347854978,36669.688278049536,5.8422728
+85,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,20.809007237384808,19.960086743544583,0.0031801
+86,West,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.719072914553227,21.140854483583816,0.0033682
+87,West,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,85.78397756586723,200.41710627819012,0.0319311
+88,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,490.69871090131176,5912.850787513055,0.942068
+89,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,41.26964226868865,83.56586244930817,0.0133143
+90,Southwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,73.04294158624438,231.2471269913336,0.036844
+91,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,202.3238652760424,1580.5653935225123,0.2518273
+92,East,FBFM4,SH7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.715951724164032,21.09292197198452,0.0033606
+93,East,FBFM4,SH7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,87.10591293695003,186.1895958306039,0.0296651
+94,East,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,91.41795868527737,124.98398798006288,0.0199134
+95,East,FBFM9,TL7,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,224.2173366739676,1874.1300611457568,0.2985967
+96,East,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,405.5640310415612,8445.640674770313,1.3456224
+97,East,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,63.0939716561484,73.52672401554595,0.0117146
+98,East,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,597.4889443650696,13003.5169484464,2.0718215
+99,Northwest,FBFM7,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,87.00696810000198,332.30533881133226,0.0529449
+100,Northwest,FBFM7,GS2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,14.480638938142134,8.570849926364929,0.0013656
+101,Northwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,70.65972930668265,198.44770835209997,0.0316179
+102,Northwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,50.11133379309965,112.88965764756132,0.0179862
+103,Northwest,FBFM12,SB2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,4.683046011663317,0.910832910388581,0.0001451
+104,Northwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,36.76977765458119,60.04382015737615,0.0095667
+105,Northwest,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,19.42094576799719,17.468376484288022,0.0027832
+106,Northwest,FBFM9,TL7,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,14.220744076819496,10.900822309888085,0.0017368
+107,Northwest,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,122.88180919782728,779.0550574981089,0.1241264
+108,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,71.49645997119768,63.81597360877647,0.0101678
+109,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.243798748573088,3.729460057945978,0.0005942
+110,Northeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,35.56727805851908,62.15077496873042,0.0099025
+111,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.166644349105535,11.798492359157184,0.0018799
+112,Northeast,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,154.4121854930073,189.19703649111375,0.0301446
+113,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,253.04247725695188,3054.5149122329926,0.486675
+114,North,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,79.73842750573145,94.56739569064644,0.0150673
+115,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,195.3465950395164,2016.3434010068768,0.3212642
+116,North,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,161.1244430300438,601.2649800025109,0.0957996
+117,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,20.69128576924048,17.161346420838864,0.0027343
+118,East,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,45.07860659153698,71.96535772887775,0.011466
+119,East,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,38.46652280063459,70.35396483842807,0.0112093
+120,East,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,167.44534017383972,1194.8381746047712,0.1903678
+121,East,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,215.0173160260008,1496.851213090865,0.2384866
+122,East,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Oak Woodland,,Resource Conservation,,SRA,Very High,67.7417681946687,259.8345437461834,0.0413982
+123,East,FBFM1,GR2,2,Santa Lucia-Reliz association,Coastal Oak Woodland,,Resource Conservation,,SRA,Very High,40.3310570373274,64.4274519266586,0.0102649
+124,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,77.07759646038795,19.138845663778252,0.0030493
+125,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,195.9389664250904,1309.0946872941663,0.2085746
+126,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,194.9629198384858,1024.125170841154,0.1631702
+127,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Oak Woodland,,Resource Conservation,,SRA,Very High,28.151456718498014,39.98501317417357,0.0063706
+128,East,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,69.59109319609277,179.67965669631033,0.0286279
+129,East,FBFM5,GS2,2,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,144.4946071325946,1088.489392555938,0.1734254
+130,East,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Oak Woodland,,Resource Conservation,,SRA,Very High,76.75980176188718,211.68627912106217,0.0337271
+131,East,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,34.495798058810124,50.51953895150855,0.0080492
+132,East,FBFM9,TL7,1,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,5.986842341658376,2.196385788717884,0.0003499
+133,East,FBFM9,TL7,2,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,51.62420600940708,104.38369741795806,0.0166312
+134,East,FBFM9,TL7,2,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,92.06585186740513,289.20573909716313,0.0460783
+135,East,FBFM9,TL7,2,Santa Lucia-Reliz association,Coastal Oak Woodland,,Resource Conservation,,SRA,Very High,147.328336906533,536.0344759058296,0.0854045
+136,East,FBFM9,TL7,2,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,31.700846466719145,57.327936300610205,0.0091339
+137,East,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,108.17351414559378,9.785885533456998,0.0015592
+138,East,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,207.2066522601829,2159.2403741004023,0.3440294
+139,East,Urban,NB1,2,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,40.696069553992565,55.402955604901216,0.0088273
+140,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,144.3870599245762,1128.9315742884771,0.1798745
+141,East,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,75.7852689522971,172.5107935727278,0.0274864
+142,East,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,463.97601334879306,3211.162939935145,0.5116325
+143,East,FBFM10,TU5,2,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,466.7834951096783,1987.6759591784912,0.3166946
+144,East,FBFM10,TU5,2,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,94.28206767230412,455.5295055066245,0.0725787
+145,Southeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,453.3037829854151,7220.356627624634,1.1504141
+146,Southeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,223.58924388865867,42.84498591232436,0.0068265
+147,Southeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,38.76258640624615,56.169595570272406,0.0089496
+148,Southeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,33.98031260048076,36.53503658024562,0.0058212
+149,Southeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,130.85486406718505,1034.9042461312179,0.164892
+150,Southeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,94.749505504294,360.9005823624812,0.0575027
+151,Southeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,17.559505493089645,4.868441134925447,0.0007757
+152,Southeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,240.55473483794364,1673.5235830838808,0.2666436
+153,Southeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,331.8294612739334,3810.7126221297217,0.6071675
+154,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,50.640861414416015,78.07454687034031,0.0124398
+155,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,69.69522291700649,258.9420356750576,0.0412579
+156,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,38.97265140906951,26.752083766199405,0.0042624
+157,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,87.86444967590161,241.095464215408,0.0384141
+158,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,88.84774183927442,293.41915943710075,0.046751
+159,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,71.19009474477616,106.68143729832074,0.0169978
+160,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,29.923858294945727,46.90360623476328,0.0074733
+161,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,32.606298770842365,46.30044574979093,0.0073772
+162,West,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,11.23566004420055,7.61917013470109,0.001214
+163,West,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,173.41424998174784,1427.9352753176438,0.2275166
+164,West,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,152.97317971038615,1271.147447941548,0.2025355
+165,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,226.32566801592137,518.6905987313784,0.0826442
+166,South,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,43.43996660714303,46.03136743639395,0.0073341
+167,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,361.8290836554962,1458.308596188526,0.2323503
+168,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,161.7655306823042,677.3515598041726,0.1079218
+169,South,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,108.3034514028596,416.4825080631669,0.0663579
+170,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,181.49637598576797,1528.5783196821235,0.2435481
+171,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,101.4536815475818,454.56485651292365,0.0724262
+172,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,113.53129786146884,477.3871421908968,0.0760623
+173,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,145.7391937199683,1113.67009562271,0.1774421
+174,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,152.4912892836874,443.9155453418337,0.0707346
+175,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,98.33022605592429,275.1778687306559,0.0438473
+176,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,13.070903560979945,7.231869925365261,0.0011523
+177,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,188.43987717567956,1269.8249794757808,0.2023377
+178,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,84.87977712255602,285.7714518218919,0.0455359
+179,Northeast,FBFM7,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.752836390062896,21.103321178832736,0.0033623
+180,Northeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.71343838009876,21.062201011423017,0.0033558
+181,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,119.5236776112778,744.2359297986368,0.1185771
+182,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,124.3223553190225,929.8580925028248,0.1481528
+183,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,346.1127274719981,4861.099206669886,0.7745378
+184,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,177.15160617278352,1117.8941826153248,0.1781162
+185,Northeast,FBFM9,TL2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,120.25483736914047,587.1489012216409,0.0935533
+186,Northeast,FBFM9,TL2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Oak Woodland,,Resource Conservation,,SRA,Very High,30.290397523431587,36.837685833611175,0.0058695
+187,Northeast,FBFM9,TL2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,43.12336468148781,8.134375446637328,0.0012961
+188,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,21.20083170397655,18.046170026312645,0.0028754
+189,Northeast,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,298.8455206570849,2790.208137510044,0.4445632
+190,Northeast,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,41.86703486524084,1.47527203170972,0.0002351
+191,Northeast,Urban,NB1,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,11.838667999901215,2.492454851956995,0.0003971
+192,Northeast,Urban,NB1,1,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,222.795027013374,745.2152569143758,0.1187351
+193,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,10.213495782768437,1.816246944745926,0.0002894
+194,Northeast,Urban,NB1,2,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,220.32672200445805,1121.5030304788606,0.1786893
+195,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,29.867636379314504,35.54417661177622,0.0056633
+196,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,14.645765983429245,2.654569871336097,0.000423
+197,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,14.489120979134572,11.911484787437844,0.0018979
+198,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,187.84148280085608,561.732862172415,0.0895047
+199,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,62.19544741770484,184.67569369958073,0.0294253
+200,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,149.43837484225404,1395.7386173047855,0.2223943
+201,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,147.0829949022223,1349.6671577688317,0.2150533
+202,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,26.121306169560157,29.69024984669408,0.0047308
+203,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,156.36493843822868,572.2276001105968,0.0911772
+204,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,148.4009166924077,1376.3295668928315,0.2192929
+205,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,278.2186199389204,672.7546989694899,0.1071912
+206,Northeast,FBFM5,GS2,2,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,101.1918367750255,525.6076124517914,0.0837458
+207,Northeast,FBFM7,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,45.38669634019743,86.32684263016851,0.0137547
+208,Northeast,FBFM7,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,71.4400961987988,164.5534831182821,0.0262188
+209,Northeast,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,149.43790454251393,1395.729830886983,0.2223945
+210,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,144.69089071411344,752.377737549108,0.1198833
+211,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,48.01051670069946,9.069072518010255,0.0014451
+212,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,68.6122794984658,166.8123187461408,0.0265797
+213,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,33.597734405085106,57.02712736726134,0.0090867
+214,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,149.43749672565437,1338.6959859857554,0.2133083
+215,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,64.57276723202114,175.30815279502943,0.0279337
+216,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,411.7515936616676,2914.607491248284,0.4644074
+217,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,250.66974916463724,2766.161348659124,0.440752
+218,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,518.033120460287,7318.570207378134,1.1661552
+219,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,369.516284183605,3897.9282528459216,0.6210705
+220,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,714.2669233565392,10613.62424999,1.6911002
+221,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,130.77632216922768,177.91395888633227,0.0283472
+222,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,678.0225161610899,9753.321415573555,1.5540413
+223,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,90.3618378847312,299.0452303386626,0.0476473
+224,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,652.9299750631764,10025.698064578608,1.5974804
+225,Northeast,FBFM10,TU5,2,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,351.3100130823953,2516.4884915706807,0.4009523
+226,Northeast,FBFM10,TU5,2,Santa Lucia-Reliz association,Annual Grassland,,Resource Conservation,,SRA,Very High,222.4555834022196,669.5222247116151,0.1066751
+227,Northeast,FBFM10,TU5,2,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,18.25673356000043,11.810910342236866,0.0018819
+228,Northeast,FBFM10,TU5,2,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,26.056540172264658,26.554706556774505,0.004231
+229,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,144.39329355973996,1301.5614848964815,0.2073926
+230,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,422.6546331617836,4774.239329194913,0.7607244
+231,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,728.6915118427363,5095.084556853024,0.8118492
+232,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,18.196954290983346,7.794631152619769,0.001242
+233,Northeast,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,146.63108003688194,1333.2466088987971,0.212443
+234,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,94.22238041077183,320.9368298967624,0.0511393
+235,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,7.011236027449831,2.892052780339987,0.0004608
+236,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,53.5927349571564,172.5496455213498,0.0274938
+237,Northwest,FBFM9,TL7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,65.64896491950316,76.43494776608306,0.0121783
+238,Northwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,149.43939512943837,1296.5473521314202,0.2065868
+239,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,41.13852832131232,99.21124080535564,0.015808
+240,Northwest,FBFM7,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,97.2143844648351,359.54600392609603,0.0572863
+241,Northwest,FBFM8,TL3,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,135.5963894895156,1003.288752673164,0.1598547
+242,Northwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,15.623381774993367,10.314416854633269,0.0016434
+243,Northwest,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,144.7896993176778,169.96641389223055,0.0270809
+244,Northwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.70984302412679,21.058529222029325,0.0033553
+245,Northwest,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,280.28030054839564,1764.6384521031143,0.2811634
+246,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,25.659829055522632,4.7885793337659,0.000763
+247,Northwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,79.73000538707277,94.44861808792787,0.0150488
+248,Northwest,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,128.9369748230535,903.7607146371117,0.1440026
+249,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,167.38122055263125,237.31644720873496,0.0378147
+250,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,239.6890881910884,936.4321536435715,0.1492093
+251,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,528.0538168577759,5183.501201640671,0.8259535
+252,Northwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,730.4466056635267,10317.795338460242,1.6439717
+253,Northwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,79.50682091280262,107.58170646541264,0.0171415
+254,Northwest,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,171.4774337830359,1209.5823332284494,0.1927302
+255,Northwest,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,139.3741332765647,681.7423527825393,0.1086256
+256,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,79.69169519400772,100.5633519334426,0.0160238
+257,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,100.18355296765576,301.8850875883432,0.0481025
+258,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,25.69989353827389,12.525573486161496,0.0019958
+259,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,59.28926316381192,117.68417704015236,0.0187521
+260,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,158.88025126188356,1278.0154962640063,0.2036425
+261,Northwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,467.76961523005224,3425.354755689953,0.5457661
+262,Northwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,68.74788068746409,73.45806684218569,0.0117044
+263,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,524.4220933643335,7032.174893227606,1.1204909
+264,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,1176.1348666000072,16612.975921227633,2.647094
+265,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,5.625594913333667,0.5009389810686,7.98e-05
+266,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,64.11031955197355,124.80898048308676,0.0198872
+267,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,32.3701160240091,22.082745830823686,0.0035187
+268,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,127.73724861878992,1011.2640803409907,0.1611387
+269,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,86.07726037645557,187.056754285698,0.0298065
+270,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,36.084640873879366,79.6952308716943,0.0126991
+271,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,88.46246386848195,309.5302428018688,0.049322
+272,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,132.79201415616075,775.046164112975,0.1234997
+273,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,181.69168987338287,870.8505543914366,0.138765
+274,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,195.1176935516872,1920.5759879458108,0.3060338
+275,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,223.6876401171077,478.08104175683746,0.0761795
+276,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,105.82518056550909,681.3719028943576,0.1085728
+277,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,81.58936829038447,329.8864985406457,0.0525657
+278,East,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,137.70143493320418,1182.7474900308775,0.1884644
+279,East,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,48.296774708604616,103.3884189389958,0.0164744
+280,East,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Urban,,Resource Conservation,,SRA,Very High,21.954358133917488,15.505979106657556,0.0024708
+281,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,366.2162512411565,2501.3221358156147,0.3985704
+282,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,127.82950395090712,845.1293112159801,0.1346657
+283,Northeast,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,91.42852049288228,311.41877291500856,0.0496226
+284,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,78.38174905216128,92.24218290877536,0.0146981
+285,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,23.217610825671485,22.77458248520501,0.003629
+286,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,68.2758023160828,214.21212680732103,0.0341335
+287,West,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,149.4364660284039,1395.7029666522153,0.2223997
+288,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,6.252119886785755,1.515189183877899,0.0002414
+289,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,20.49780537661737,19.5095740873012,0.0031088
+290,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,132.79160631367375,1084.5781948673118,0.1728231
+291,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,44.389931166817355,12.366733030965904,0.0019706
+292,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,10.976126096088318,2.347860755624428,0.0003741
+293,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,82.38664262330211,248.71743033687756,0.0396321
+294,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,30.722976625587055,26.663457958565008,0.0042487
+295,North,FBFM7,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,100.28512953357576,521.4557588157761,0.0830862
+296,North,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,40.723413680132815,34.8889834693512,0.0055591
+297,North,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,22.07876488865746,29.158272158981124,0.004646
+298,North,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,30.141657800941186,53.2380422730767,0.0084828
+299,North,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,49.308192807532926,67.80699846823391,0.0108041
+300,North,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,30.09154947672407,48.74898098212945,0.0077675
+301,North,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,151.04744481883358,1177.4077237688634,0.1876044
+302,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,27.284208346604892,25.749009494447293,0.0041028
+303,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,220.54865676791812,2773.4414052339353,0.4419131
+304,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,119.46459622731768,793.6027401601094,0.1264511
+305,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,92.55805412112807,290.655397160625,0.0463124
+306,North,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,77.6147368254198,146.3753962873647,0.0233235
+307,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,419.6828094039655,3974.438408190637,0.6332781
+308,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,482.12463861170727,4242.710453919835,0.6760173
+309,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,271.47671523317433,1180.6360585641619,0.1881205
+310,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,301.40071229220666,1541.0682250821083,0.2455464
+311,North,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,32.664506274365884,42.63433255893271,0.0067936
+312,North,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,139.17044692557255,1001.930230387078,0.1596533
+313,North,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,91.07393419930314,256.9508113031161,0.0409441
+314,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,63.18716144172616,153.33461833130332,0.0244331
+315,North,FBFM10,TU5,2,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,155.1826745810006,1319.8229238990325,0.2103036
+316,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,845.5462190483028,16457.387025064945,2.6223722
+317,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,318.8962268552815,1736.2094833010456,0.2766563
+318,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,21.25376061904924,19.375652794301427,0.0030874
+319,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,37.301057901085805,85.9625758016591,0.0136978
+320,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,54.87063475428485,158.13725450554278,0.0251983
+321,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,48.64963051999054,132.23036425310005,0.0210702
+322,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,8.279429185702504,2.870744210349267,0.0004574
+323,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,378.5857235528485,2451.3655755655295,0.3906082
+324,North,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,131.50810584357956,1076.5650055362307,0.1715436
+325,North,FBFM5,SH2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,54.90365083406193,39.4542572119374,0.0062868
+326,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,79.71203970532976,94.15082063946589,0.0150022
+327,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,229.1477835029388,1272.621040936021,0.2027811
+328,North,FBFM9,TL7,2,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,40.06528339972279,41.56140767060883,0.0066225
+329,North,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,144.7613391429964,1318.1152928645492,0.2100303
+330,North,Urban,NB1,2,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,103.48123573830284,577.9424423722285,0.0920903
+331,North,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,81.67107680847408,201.32327672332988,0.0320791
+332,North,FBFM5,GS2,2,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,71.83465354031259,125.7970619143884,0.0200447
+333,North,Urban,NB1,2,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,122.92038222552237,511.2375199357488,0.0814617
+334,North,Urban,NB1,2,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,11.017483463112429,5.578017915736161,0.0008888
+335,North,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,196.7974770956833,1646.4690860730873,0.2623525
+336,North,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,31.229839823347422,61.932310779874314,0.0098685
+337,North,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,92.16232918154935,384.9805378913096,0.0613445
+338,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,267.65489132433777,4363.270069149021,0.6952661
+339,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,121.95074447900868,417.04246020065216,0.066454
+340,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,54.98011486833527,177.21899598703274,0.0282392
+341,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,149.43646929567453,1273.4498433706844,0.2029188
+342,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,44.330730307355445,122.25086770751828,0.0194802
+343,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,63.05168106701302,73.09440492562494,0.0116472
+344,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,21.69622198397816,20.98502880763884,0.0033439
+345,South,FBFM2,GS1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,64.82683600808926,194.95866549123087,0.0310658
+346,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,37.007580854536045,51.38717013156963,0.0081884
+347,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,125.2505110136152,934.6080030940589,0.1489258
+348,West,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,91.41152436943484,311.0968871905057,0.0495717
+349,West,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,134.165692813456,1060.9445389637256,0.1690561
+350,West,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,109.89042349735952,612.8178381045277,0.0976506
+351,West,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,95.44932777848851,429.33642509519694,0.0684136
+352,West,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,42.065218702036965,41.56610398460398,0.0066234
+353,West,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,13.657413622945104,10.776279409277414,0.0017172
+354,West,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,12.318745843988898,9.008592807296855,0.0014355
+355,West,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,5.386345549585373,1.23716648232773,0.0001971
+356,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,17.193981057547937,15.383385549156134,0.0024513
+357,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,10.314781870745144,4.026956679692413,0.0006417
+358,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,28.524601252117293,16.964949818658866,0.0027033
+359,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,81.64499529566726,253.71643130167897,0.040429
+360,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,0.751247868115027,0.023062859542988,3.7e-06
+361,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,65.59788986379087,107.96096242528624,0.0172032
+362,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,62.20852554234791,182.12493569274025,0.0290211
+363,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,14.495029699555836,11.925648420802489,0.0019003
+364,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,3.837876238246904,0.62809725761432,0.0001001
+365,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,52.97608677115719,60.72189928999552,0.0096758
+366,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,7.689888929348127,2.648247448142377,0.000422
+367,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,20.140629233031444,18.370481681539854,0.0029273
+368,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,33.5969503368078,57.02455541569303,0.0090867
+369,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,127.73922055034345,954.2622505347242,0.1520589
+370,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,91.41731534609411,308.21790172363546,0.0491109
+371,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,16.21507169590029,2.971158940821126,0.0004734
+372,Northeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,25.355440257844556,7.257739605801701,0.0011564
+373,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,57.26021858388195,72.23569334769574,0.01151
+374,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,24.668539350643304,34.785074484425195,0.0055426
+375,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,64.52208089699009,189.5046696637284,0.0301955
+376,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,17.625298848015277,11.099335289982346,0.0017686
+377,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,19.89852689820443,16.02183652914929,0.0025529
+378,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,62.755259262407726,53.31196337896738,0.008495
+379,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,95.27568320058111,395.4500096312672,0.0630131
+380,Northeast,FBFM4,SH7,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,113.38981774548373,678.5737615781521,0.1081228
+381,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,22.47776542278532,30.550613441063454,0.0048679
+382,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,167.14915544503094,682.6341013030355,0.1087732
+383,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,194.5261686272819,1277.6687677914013,0.2035824
+384,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,174.3140299923485,1089.6701439814647,0.1736289
+385,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,116.21271907121589,557.4481105963788,0.0888276
+386,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,70.50049727941101,203.15079341776968,0.0323715
+387,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,30.85094747372373,41.25850802562493,0.0065744
+388,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,63.43871937148225,209.42560644924015,0.0333714
+389,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,86.36401593090413,290.13486039828933,0.0462321
+390,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,21.704142168499715,21.042918684537305,0.0033529
+391,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,28.434662983004856,22.13182380335606,0.0035265
+392,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,15.913923119745174,2.792360235368007,0.0004449
+393,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,41.6580445104196,37.44815346555959,0.0059672
+394,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,114.08070779088564,610.1322020986307,0.097222
+395,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,59.90270087560607,113.02633893262669,0.0180103
+396,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,40.07678248193078,72.8979186585101,0.011616
+397,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,60.401056525906405,177.7729490822012,0.0283275
+398,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,135.92041046057994,1154.0600665371564,0.1838949
+399,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,26.97781946345189,29.74691579213125,0.0047401
+400,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,87.67595282499127,225.443833386731,0.0359236
+401,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,127.73910675282912,1011.2781117060132,0.1611442
+402,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,86.36611354661446,290.1568813987205,0.0462356
+403,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,12.02578580714482,6.109550165081684,0.0009735
+404,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,121.10556327044432,865.6401330217035,0.1379364
+405,Northeast,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,91.41886373788005,311.24205484359715,0.0495955
+406,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,65.08701524686917,169.98334477859896,0.0270863
+407,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,116.86723555400889,547.9605090557728,0.0873156
+408,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,0.472397495302491,0.008917514910039,1.4e-06
+409,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,207.3767155843732,1762.1890402931515,0.2807996
+410,West,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,21.6954379409174,21.016552943310767,0.0033489
+411,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,113.06873148135993,742.6887080774957,0.1183462
+412,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,109.82328372030808,612.5768222770823,0.0976128
+413,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,13.011516754650406,9.329154185988266,0.0014866
+414,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,4.35852891280155,0.776465437873022,0.0001237
+415,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,9.817453762590802,1.508145529583044,0.0002403
+416,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,55.74192896751356,61.640745786564125,0.0098223
+417,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,21.695637902074456,18.04252997839194,0.002875
+418,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,16.21456981406686,2.97069556891002,0.0004734
+419,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,25.35343276114142,7.25025249851967,0.0011553
+420,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,76.0824215597393,143.3041710364494,0.0228353
+421,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,56.79805354548175,139.57350606667495,0.0222408
+422,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,97.15273325947244,353.3014851570921,0.056298
+423,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,102.55458122976572,657.986323931794,0.1048488
+424,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,63.06982691164389,73.23523271210306,0.0116699
+425,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,82.17394713816027,350.3441098260719,0.0558266
+426,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,119.41310538917352,602.6008108017329,0.0960234
+427,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,39.430490063080086,58.34201758398518,0.0092967
+428,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,218.50155437475848,2567.955615318976,0.4091944
+429,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,253.7187437464036,1670.4284989935677,0.2661783
+430,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,161.80365352216853,912.6186802269053,0.1454242
+431,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,233.5532301005053,1109.9157188060715,0.1768607
+432,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,114.87842722101585,293.53132816991194,0.0467733
+433,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,1.911261269777852,0.179348401588312,2.86e-05
+434,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,132.65529197259934,303.7051244621043,0.0483948
+435,West,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,79.71527859542452,94.2385065612713,0.0150168
+436,West,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,21.694336176378133,21.00733613068064,0.0033475
+437,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,200.94537369083136,2323.816111198092,0.3702983
+438,West,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,86.36550972102803,290.141102942964,0.0462338
+439,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,63.06761943232719,73.21126200330829,0.0116661
+440,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,149.43432102794702,1322.4596134988687,0.2107329
+441,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,62.29626571225428,62.041570850720554,0.0098862
+442,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,58.78829298167727,11.159220798777593,0.0017782
+443,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,19.72215052538125,16.513981395446958,0.0026315
+444,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,298.8692064007268,4097.308415663185,0.6529012
+445,Southeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,14.888922575489325,5.498396843164194,0.0008761
+446,Southeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,63.049575555784656,73.07453982240717,0.0116441
+447,Southeast,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,22.706259390749228,16.313507984606524,0.0025995
+448,Southeast,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,41.45716888145886,45.870545078345856,0.0073092
+449,Southeast,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Urban,,Resource Conservation,,SRA,Very High,33.702943523777606,30.558876055853283,0.0048694
+450,Southeast,FBFM2,GS1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,1.261803096051886,0.029674364544412,4.7e-06
+451,Southeast,FBFM2,GS1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,124.17971222452255,632.0854946950432,0.1007199
+452,Southeast,FBFM2,GS1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Urban,,Resource Conservation,,SRA,Very High,36.83082862665455,35.78924001896372,0.0057028
+453,Southeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,66.24195875095793,168.2819124538057,0.0268151
+454,Southeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,83.62411489662436,309.6447707714262,0.0493409
+455,Southeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Urban,,Resource Conservation,,SRA,Very High,14.568728480406772,12.341015216370913,0.0019665
+456,Southeast,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,79.71054988585684,94.145528423554,0.0150019
+457,Southeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,21.69492815424687,20.993569351742433,0.0033453
+458,Southeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,127.7407886578524,1011.2989698475632,0.1611508
+459,Southeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,747.0743839096294,12830.25146480678,2.0444942
+460,East,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,29.163386819747924,26.59600748121384,0.004238
+461,East,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,137.05806026767095,1057.8352116151711,0.1685628
+462,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,109.09971248803504,331.5927758918557,0.0528387
+463,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,164.87909339519527,1064.061902092228,0.1695561
+464,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,41.62039684205713,87.71025557413162,0.0139765
+465,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,429.667257591248,5471.881617730825,0.8719248
+466,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Urban,,Resource Conservation,,SRA,Very High,110.20014947022808,698.8545664572273,0.1113609
+467,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,219.70108969826745,2043.5200742856632,0.3256288
+468,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,154.19011988232563,572.6705483099712,0.0912529
+469,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Urban,,Resource Conservation,,SRA,Very High,32.73402571933869,54.63249025498873,0.0087055
+470,East,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,90.41923115830777,252.00898839069896,0.0401574
+471,East,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,181.43630174845103,1186.1400420551329,0.1890109
+472,East,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Urban,,Resource Conservation,,SRA,Very High,55.451611013533565,93.19794020807505,0.0148509
+473,East,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,128.9483837420605,753.5440133033818,0.1200782
+474,East,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,134.94935187611344,548.0148600466453,0.0873269
+475,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,86.37976947702762,290.2799213214851,0.0462565
+476,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,183.8655220884017,978.1024589645978,0.1558605
+477,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,491.93216423628314,7473.360647976982,1.190878
+478,Southeast,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,127.74225086713236,1011.3098801538528,0.1611547
+479,Southeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,21.690725028415617,20.97897418314655,0.003343
+480,Southeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,86.37738177742528,290.2501605637797,0.0462521
+481,Southeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,63.05629201321374,73.10421321320305,0.0116493
+482,East,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,62.33503598477731,72.28722368806639,0.0115193
+483,East,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,3.724359039005804,0.58886550755782,9.38e-05
+484,East,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,82.21279023469718,260.653950303743,0.0415364
+485,East,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,127.7434230297642,1011.3195211161918,0.1611584
+486,East,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,53.061723118479854,81.21227559914365,0.0129402
+487,East,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,112.41889338885188,542.8125588270475,0.0864906
+488,West,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,123.85725739791604,519.7406829313543,0.0828151
+489,West,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,77.87774502977973,340.7910260744548,0.0543015
+490,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,81.8581569329355,306.3341939230744,0.048811
+491,West,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,411.91800501348854,4191.65508134098,0.6678921
+492,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,124.49805342746606,929.8445031623069,0.1481598
+493,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,71.43428766973587,148.10159813901132,0.0235983
+494,East,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,15.240406825863824,2.780075438661676,0.000443
+495,East,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,20.673170498869037,3.824783482527822,0.0006094
+496,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,91.48949751778669,445.765761903242,0.0710259
+497,East,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,47.84124402256798,143.0354805626581,0.0227911
+498,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,91.28835091968016,251.7069616386196,0.0401068
+499,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,60.78909887333871,164.93399391260056,0.0262804
+500,East,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,29.27363459870385,46.757431689322075,0.0074503
+501,East,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,259.63230186404354,2041.1893007999424,0.3252369
+502,East,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,,Resource Conservation,,SRA,Very High,405.2002035552691,2601.554343121731,0.4145236
+503,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,29.356188243019798,8.497874958189747,0.001354
+504,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,17.41780917540891,3.202123668378692,0.0005102
+505,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,98.98740251573646,309.06193505936574,0.0492447
+506,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,243.0678283637153,1484.6644387017886,0.236563
+507,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,221.42820648653355,925.8414161321436,0.147521
+508,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,27.17524436710973,13.42140786358588,0.0021386
+509,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,125.69228571806504,818.7803285048042,0.1304636
+510,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,142.17282236405507,532.3588397663591,0.0848246
+511,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,214.7827788869616,1249.102996321288,0.1990283
+512,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,13.844393912718688,11.092667019224145,0.0017676
+513,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,6.631067774783453,1.866681172563822,0.0002975
+514,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,85.41395406115461,265.9535988047883,0.0423806
+515,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,115.36458045867079,375.42834947234184,0.0598259
+516,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Urban,,Resource Conservation,,SRA,Very High,56.31943639397216,134.65580780288875,0.0214579
+517,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,39.371271824979274,43.24990755772939,0.006892
+518,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,28.72199316401877,29.836405245873674,0.0047545
+519,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,100.22376740712156,185.5641413703057,0.0295699
+520,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,275.8036328249324,784.7088736382485,0.1250475
+521,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Urban,,Resource Conservation,,SRA,Very High,73.62817815624608,221.2312713913432,0.0352542
+522,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Urban,,Resource Conservation,,SRA,Very High,90.14638922066429,346.83156178628667,0.0552696
+523,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Urban,,Resource Conservation,,SRA,Very High,7.258713566922217,1.674569002676322,0.0002669
+524,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,49.81468453735447,59.23205079917006,0.0094391
+525,Northeast,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Urban,,Resource Conservation,,SRA,Very High,5.605080059646018,1.340886693509833,0.0002137
+526,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,75.70726423256333,257.2687687032244,0.0409964
+527,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,180.28452629260636,1354.7058902882125,0.2158757
+528,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,93.40964578772736,412.83077630967927,0.0657856
+529,Northeast,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,107.08873438613993,409.1372645460559,0.0651973
+530,Northeast,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,103.59004996727316,602.1758218956668,0.0959589
+531,Northeast,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,120.12893457781173,363.928348827028,0.0579945
+532,Northeast,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Urban,,Resource Conservation,,SRA,Very High,72.94772333475571,239.2240650903724,0.038122
+533,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,31.178572166593096,28.823449196117288,0.004593
+534,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,205.3000228458484,1461.0085665308668,0.2328123
+535,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,20.858861737795568,16.70676924505629,0.0026622
+536,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,101.7784010866509,471.68268028143785,0.0751639
+537,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,125.5595984958958,862.2118524521267,0.1373955
+538,South,FBFM2,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,149.43158012169226,384.3070426401483,0.0612403
+539,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,4.313220241738533,0.688920555966168,0.0001098
+540,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,143.75424997658885,1300.8735654813213,0.2072987
+541,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,97.41464119806291,348.12154492845127,0.0554736
+542,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,62.15852744303886,143.07970687561823,0.0227999
+543,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,30.080235545419125,33.50688351292618,0.0053394
+544,South,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,144.97642242216875,1362.1188069534687,0.2170555
+545,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,56.0223184769597,54.64603210446683,0.008708
+546,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,95.14975490334557,60.38513597153976,0.0096225
+547,South,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,25.35911785001011,7.284659220031447,0.0011608
+548,South,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,86.37927155152086,282.97952416666567,0.0450938
+549,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,453.3025817286911,2051.647196572146,0.3269357
+550,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,780.0486742189923,4191.088365252635,0.6678594
+551,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,72.13467109642053,136.79205362324532,0.0217983
+552,South,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,21.68872146004667,20.96774227287401,0.0033413
+553,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,110.04589741200257,536.8450229177017,0.0855493
+554,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,87.95368218997035,286.4647393618547,0.0456497
+555,South,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,166.08487307216924,405.25384056619464,0.0645794
+556,South,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,63.05148504227192,73.05708298829633,0.0116419
+557,South,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,10.73641419715772,4.268538616960642,0.0006802
+558,South,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,147.8401636202553,380.011432118515,0.0605566
+559,South,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,87.37355337922794,287.72056220824066,0.04585
+560,South,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,131.04582562227768,1000.817852512954,0.1594859
+561,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,95.57691682489117,443.3037204903104,0.0706427
+562,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,117.21688185476621,805.6504604916428,0.128384
+563,North,FBFM5,SH2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,36.03746903190336,44.57914978634016,0.007104
+564,North,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,36.372307133120216,80.73999824777334,0.0128665
+565,North,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,42.915960585179526,42.967927558105536,0.0068472
+566,Southwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,227.54143342188647,650.7500074111346,0.1036947
+567,Southwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,54.92019768701307,55.48396869845444,0.0088412
+568,Southwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,14.722010914428845,12.116150272183154,0.0019307
+569,Southwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,46.73334378722708,52.443819540486615,0.0083567
+570,Southwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,22.646362607451167,20.607300464495584,0.0032838
+571,Southwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,82.46199495695326,269.5283728582152,0.0429494
+572,Southwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,102.72076627026868,244.79906150718136,0.0390089
+573,Southwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Watershed and Scenic Conservation,,SRA,Very High,229.99816679011283,864.2166600850211,0.1377099
+574,Southwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,315.38243288933825,1630.2659762776589,0.2597821
+575,Southwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Watershed and Scenic Conservation,,SRA,Very High,44.97048509588457,66.56419004532339,0.0106069
+576,Southwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,,Resource Conservation,,SRA,Very High,49.471476909399705,131.82040201486816,0.0210053
+577,Southwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,16.131194685175295,10.242326136565422,0.0016322
+578,Southwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,74.53458101548645,83.80392336051568,0.0133545
+579,Southwest,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,21.688721462932875,20.970645306563032,0.0033418
+580,Southwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,201.68244937839225,850.0421732958083,0.135458
+581,Southwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,125.21212425827451,417.83469673783475,0.0665837
+582,Southwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,69.8482477316426,129.82661747217796,0.0206884
+583,Southwest,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,4.295219766312901,0.683165796527257,0.0001089
+584,Southwest,Urban,NB1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,95.71590680788755,114.2183381376362,0.0182014
+585,Southwest,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,61.891173709071005,65.89758495999192,0.0105012
+586,Southwest,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,8.559878750923822,2.713266777279967,0.0004324
+587,Southwest,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,1.748521664754712,0.083113800965276,1.32e-05
+588,Southwest,FBFM1,GR1,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,75.37434076317072,241.69851152055512,0.0385163
+589,Southwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Rural Grazing,,SRA,Very High,138.8078319313558,414.9007130604228,0.0661172
+590,Southwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,,Resource Conservation,,SRA,Very High,107.67231110203366,424.8119004662656,0.0676965
+591,Northwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,27.67397273086207,7.918780705340955,0.0012617
+592,Northwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,33.151665209498965,27.55950951189978,0.0043911
+593,Northwest,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,40.393675453652634,95.73984823829264,0.0152544
+594,Northwest,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,300.2501550509133,701.1978822185123,0.1117237
+595,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,64.98913901335656,200.87102747928637,0.0320056
+596,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,76.02098903620538,252.60936615491417,0.0402486
+597,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,431.14519396199654,5587.048775739979,0.8902012
+598,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,39.39782398579592,16.74209052066318,0.0026676
+599,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,53.64581100694948,56.716253922860105,0.0090368
+600,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,101.32534769066636,482.79645434160057,0.0769258
+601,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,74.70113948515146,301.5323400688644,0.0480443
+602,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,49.786482443270415,37.46694176551038,0.0059698
+603,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,155.88754865467038,1319.0235476844373,0.210157
+604,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,10.665198184778305,4.532136891844228,0.0007221
+605,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,68.77739253239909,62.2143887351364,0.0099125
+606,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,25.502994663504207,16.891143465787547,0.0026912
+607,Southwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,30.743171903385015,21.191707424497967,0.0033764
+608,Southwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,38.70903723918276,83.42059154304754,0.0132913
+609,East,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,6.617461811756291,0.552477255543131,8.8e-05
+610,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,102.99307256176147,236.39141916251563,0.0376644
+611,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,43.435631441792346,80.70505931140558,0.0128588
+612,Northeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,96.70653491791865,196.80215594110985,0.0313566
+613,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,125.37733671389564,740.4418275499709,0.1179752
+614,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,167.0647431882659,943.8039167751609,0.1503771
+615,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,41.930223150731,79.50284441438434,0.0126673
+616,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,64.025773242984,83.48652088293424,0.013302
+617,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,140.8117167106333,1295.173344015285,0.2063624
+618,Southeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,1.002811761413145,0.03688551016909,5.9e-06
+619,Southeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,7.793070653952041,3.700069635887058,0.0005895
+620,Southeast,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,9.138261331285785,2.355935536768366,0.0003754
+621,Southeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,99.89511217246387,492.8575186498084,0.0785275
+622,Southeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,84.18776026396297,232.7348660814881,0.0370821
+623,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,66.13174495300149,267.2581183315875,0.042583
+624,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,267.16336194866767,2890.185182402039,0.4604965
+625,North,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,194.48653767819383,496.07825826390894,0.0790412
+626,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,39.37991579544629,31.58522901699836,0.0050325
+627,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,262.1931811405046,2138.7057547621334,0.3407655
+628,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,108.26992288797916,664.3462279281553,0.1058514
+629,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,100.17817225157978,603.0766523005606,0.0960897
+630,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,30.073376708599127,48.706382101618615,0.0077605
+631,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,103.57826089789856,612.0993284189714,0.0975277
+632,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,2.257937936029265,0.127149329548536,2.03e-05
+633,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,39.98320292492898,39.994584169246814,0.0063724
+634,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,28.056993583003536,38.94241338219111,0.0062048
+635,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,32.719320170401964,49.94168745779548,0.0079574
+636,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,22.819405922522954,9.353576921469807,0.0014903
+637,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,12.593631144922911,9.515150814416923,0.0015162
+638,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,14.167540415503234,11.520617658952046,0.0018357
+639,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,191.0218952124698,1377.984968506377,0.2195711
+640,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,67.79156233601475,72.07455184101262,0.0114845
+641,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,155.608194429575,398.973657214502,0.0635733
+642,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,150.16342125625536,202.3048721391386,0.0322357
+643,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,79.72037167781853,94.29539791287105,0.0150249
+644,North,FBFM7,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,79.71957182559953,94.28046691770093,0.0150225
+645,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,154.4886945625123,1176.9116557921843,0.1875269
+646,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,10.213295805469002,1.816208454364594,0.0002894
+647,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,82.47228082702289,331.2410347253554,0.0527796
+648,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,428.32949217757584,2891.572859587583,0.4607404
+649,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,194.04590663501864,691.2869734811795,0.1101493
+650,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,149.43903394282188,1395.750926544304,0.2223949
+651,Northeast,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,96.51936805156568,162.1349219344806,0.0258339
+652,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,258.54328299764063,2496.9743080302906,0.3978621
+653,Northeast,FBFM7,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,144.38794592679147,1301.460757176283,0.2073724
+654,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,293.9287007998262,3008.531154828685,0.4793693
+655,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,91.73286322823628,227.31515372374008,0.0362197
+656,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,658.9864005815342,5689.104058774227,0.9064825
+657,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,366.257246705757,2085.1848888774507,0.3322533
+658,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,106.21662636993985,543.6631623815239,0.0866287
+659,Northeast,FBFM9,TL7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,62.182103624781405,62.45557796435944,0.0099518
+660,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,104.60159706817232,616.2988005153563,0.0982033
+661,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,31.96842121931774,44.38223843884531,0.0070721
+662,North,FBFM7,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,47.49903230371351,90.06646114475025,0.0143507
+663,North,FBFM8,TL3,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,4.274686724609809,0.609813587419243,9.72e-05
+664,North,FBFM8,TL3,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,59.46420885889323,165.43668512797035,0.0263597
+665,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,25.140159940942457,13.330856764119012,0.0021241
+666,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,58.14562603365499,76.9848666298464,0.0122663
+667,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,250.0330375381347,3327.0541720121046,0.5301172
+668,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,103.39671015491005,142.0826993416353,0.0226386
+669,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,226.29645831657572,651.1443357942339,0.1037499
+670,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,109.41862151840958,752.903925054128,0.1199713
+671,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,119.14367302919712,392.2892185733298,0.062509
+672,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,0.157242176330513,0.001083404976287,2e-07
+673,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,43.808596282110734,35.930859548934976,0.0057252
+674,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,27.50788853011534,25.353304564816444,0.0040398
+675,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,30.8776068497914,19.42465308922144,0.0030951
+676,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,60.966309136173706,69.72669142209942,0.0111102
+677,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,167.3327261989766,832.0588695249893,0.1325796
+678,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,89.08106957819686,281.7385335517217,0.0448923
+679,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,125.77946516480092,783.1876145533068,0.1247935
+680,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,109.75104062557224,294.80290959288106,0.046975
+681,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,173.3094706644901,1508.2549947276923,0.2403317
+682,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,157.18721567606894,474.4139156889264,0.0755945
+683,Northeast,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,52.798185185477216,104.7921298464026,0.0166977
+684,Northeast,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,35.68878641492972,29.899812098133793,0.0047642
+685,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,6.257216924402018,1.521052211684518,0.0002424
+686,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,64.62825041096846,37.995659018525146,0.0060542
+687,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,73.2340387482896,190.846096475914,0.0304105
+688,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,19.61817279602179,18.39720465436654,0.0029315
+689,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,371.8551032499844,2126.4583007565034,0.3388389
+690,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,94.03582520161724,393.9317701970705,0.0627712
+691,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,118.15381009033568,754.8255028525409,0.120278
+692,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,86.38622101426857,248.64497658994236,0.0396204
+693,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,117.13912451085211,821.3366053932317,0.1308761
+694,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,332.34273356559214,2557.2321145157075,0.4074598
+695,East,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,229.3699961386844,1037.6893204905264,0.1653419
+696,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,40.049871340734605,60.45417377917617,0.0096328
+697,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,84.03785482141213,383.86158906855496,0.0611643
+698,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,17.153992826729805,7.151870415746988,0.0011396
+699,East,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,2.096360818027015,0.089041351684162,1.42e-05
+700,East,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,76.28928410343262,243.40608952257688,0.0387842
+701,East,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,392.3703902933032,2423.9307087598063,0.3862211
+702,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,195.02513764159067,324.35106110394474,0.0516808
+703,East,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,45.52898247464073,128.42631572676507,0.0204633
+704,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,137.014189534571,1140.071623639826,0.1816541
+705,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,28.549610079188536,30.23452496713278,0.0048175
+706,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,38.50654651389364,39.30213666909654,0.0062623
+707,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,49.364986081372045,152.05119788817066,0.0242273
+708,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,114.23720320158928,448.2975057170025,0.0714293
+709,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,227.78873596714104,1776.3542846180085,0.2830361
+710,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,24.476544161187803,25.05547660796885,0.003992
+711,East,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,24.476544161187803,25.05547660796885,0.003992
+712,Southwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,31.292243099994096,58.51708062101738,0.0093234
+713,Southwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,31.292243099994096,58.51708062101738,0.0093234
+714,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,137.0631306660673,481.33263195700175,0.0766897
+715,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,137.0631306660673,481.33263195700175,0.0766897
+716,South,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,41.94570784264983,39.358893475282485,0.006271
+717,South,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,41.94570784264983,39.358893475282485,0.006271
+718,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,96.5956669838036,248.90423148148983,0.0396575
+719,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,96.5956669838036,248.90423148148983,0.0396575
+720,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,44.8327713138726,80.14358493341734,0.0127692
+721,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,44.8327713138726,80.14358493341734,0.0127692
+722,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,76.30196633258117,116.6898103778678,0.0185921
+723,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,76.30196633258117,116.6898103778678,0.0185921
+724,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,43.12245872640028,24.31827391220756,0.0038746
+725,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,43.12245872640028,24.31827391220756,0.0038746
+726,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,257.90517740374486,2610.1623798188057,0.4159037
+727,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,257.90517740374486,2610.1623798188057,0.4159037
+728,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,211.8308032101424,435.4726231083823,0.0693884
+729,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,211.8308032101424,435.4726231083823,0.0693884
+730,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,141.12308349606755,282.2164984486299,0.0449686
+731,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,141.12308349606755,282.2164984486299,0.0449686
+732,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,149.4373243869906,1322.476624494677,0.2107254
+733,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,149.4373243869906,1322.476624494677,0.2107254
+734,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,248.48100087283063,2060.5875101046377,0.3283336
+735,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,248.48100087283063,2060.5875101046377,0.3283336
+736,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,226.673733411801,1156.375386916312,0.1842578
+737,North,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,226.673733411801,1156.375386916312,0.1842578
+738,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,291.79551701014174,5036.020521778792,0.8024501
+739,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,291.79551701014174,5036.020521778792,0.8024501
+740,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,147.7604523455086,1348.5039788752,0.2148727
+741,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,147.7604523455086,1348.5039788752,0.2148727
+742,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,63.06691759579472,73.2328845267257,0.0116691
+743,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,63.06691759579472,73.2328845267257,0.0116691
+744,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,155.87317194359096,725.6751473500702,0.1156301
+745,Northeast,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,155.87317194359096,725.6751473500702,0.1156301
+746,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,118.72386080732272,823.2314099473444,0.1311758
+747,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,118.72386080732272,823.2314099473444,0.1311758
+748,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,170.04321452080063,1085.2710599396687,0.1729299
+749,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,170.04321452080063,1085.2710599396687,0.1729299
+750,North,FBFM8,TL3,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,57.19127255841662,64.83934719118857,0.0103311
+751,North,FBFM8,TL3,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,57.19127255841662,64.83934719118857,0.0103311
+752,North,FBFM8,TL3,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,95.80815896683998,467.26214764642833,0.0744507
+753,North,FBFM8,TL3,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,95.80815896683998,467.26214764642833,0.0744507
+754,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,66.02883812472031,103.99937284891404,0.0165706
+755,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,66.02883812472031,103.99937284891404,0.0165706
+756,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,125.78615761905412,180.75345138199347,0.0288001
+757,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,125.78615761905412,180.75345138199347,0.0288001
+758,North,Barren,NB9,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,21.705318235245663,21.000847219236523,0.0033462
+759,North,Barren,NB9,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,21.705318235245663,21.000847219236523,0.0033462
+760,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,113.42619444610563,306.19758432339734,0.0487878
+761,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,113.42619444610563,306.19758432339734,0.0487878
+762,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,52.0261599880368,17.554119069343372,0.002797
+763,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,52.0261599880368,17.554119069343372,0.002797
+764,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,80.74679201916872,347.98755256879247,0.0554464
+765,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,80.74679201916872,347.98755256879247,0.0554464
+766,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,7.971142815923338,0.817449895139395,0.0001302
+767,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,7.971142815923338,0.817449895139395,0.0001302
+768,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,49.28637105420464,105.02467101853152,0.0167351
+769,North,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,49.28637105420464,105.02467101853152,0.0167351
+770,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,21.69893527187332,21.01372008141901,0.0033484
+771,North,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,21.69893527187332,21.01372008141901,0.0033484
+772,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,142.43923942152333,1275.4554753791751,0.2032357
+773,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,142.43923942152333,1275.4554753791751,0.2032357
+774,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,67.27523374762427,107.62608769861984,0.0171491
+775,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 2 to 9 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,67.27523374762427,107.62608769861984,0.0171491
+776,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,118.80111182862665,684.3306167938131,0.1090411
+777,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,118.80111182862665,684.3306167938131,0.1090411
+778,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,173.62197005793746,1618.2927157513805,0.2578597
+779,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,173.62197005793746,1618.2927157513805,0.2578597
+780,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,68.36202076102764,207.399048240471,0.0330477
+781,Northeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,68.36202076102764,207.399048240471,0.0330477
+782,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,167.94658742494113,625.096322166497,0.0996049
+783,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,167.94658742494113,625.096322166497,0.0996049
+784,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,368.34822275825593,5031.98390960183,0.8018105
+785,Northeast,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,368.34822275825593,5031.98390960183,0.8018105
+786,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,113.28360937464451,772.5225204319838,0.1230973
+787,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,113.28360937464451,772.5225204319838,0.1230973
+788,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Resource Conservation,,SRA,Very High,49.593265598006695,92.63448662919555,0.0147608
+789,North,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,49.593265598006695,92.63448662919555,0.0147608
+790,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,43.55777572393868,109.84172306116837,0.0175027
+791,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,43.55777572393868,109.84172306116837,0.0175027
+792,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,266.4629283246828,3438.617541027673,0.5479225
+793,Northwest,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,266.4629283246828,3438.617541027673,0.5479225
+794,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,108.99651279436554,738.5842829434268,0.1176814
+795,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,108.99651279436554,738.5842829434268,0.1176814
+796,Northwest,Barren,NB9,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,127.72173806346372,1022.2186006482716,0.1628738
+797,Northwest,Barren,NB9,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,127.72173806346372,1022.2186006482716,0.1628738
+798,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,30.6538841374478,35.389601174024705,0.0056388
+799,Northwest,FBFM4,SH7,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,30.6538841374478,35.389601174024705,0.0056388
+800,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Resource Conservation,,SRA,Very High,94.05808759797581,403.5591328495871,0.0643008
+801,Northwest,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Resource Conservation,,SRA,Very High,94.05808759797581,403.5591328495871,0.0643008
+802,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,60.37245929018174,143.4604418801772,0.0228573
+803,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,60.37245929018174,143.4604418801772,0.0228573
+804,West,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,60.37245929018174,143.4604418801772,0.0228573
+805,Southwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,1.990569054843652,0.126244758422168,2.01e-05
+806,Southwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,1.990569054843652,0.126244758422168,2.01e-05
+807,Southwest,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,1.990569054843652,0.126244758422168,2.01e-05
+808,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,247.49955068149123,1445.1831029006937,0.2302586
+809,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,247.49955068149123,1445.1831029006937,0.2302586
+810,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,247.49955068149123,1445.1831029006937,0.2302586
+811,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,126.84640442949475,736.7370870121531,0.1173835
+812,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,126.84640442949475,736.7370870121531,0.1173835
+813,Southwest,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,126.84640442949475,736.7370870121531,0.1173835
+814,Southwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,56.23269423045262,129.74763344551792,0.0206725
+815,Southwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,56.23269423045262,129.74763344551792,0.0206725
+816,Southwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,56.23269423045262,129.74763344551792,0.0206725
+817,Southwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,98.63874746246064,492.04093457356146,0.0783963
+818,Southwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,98.63874746246064,492.04093457356146,0.0783963
+819,Southwest,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,98.63874746246064,492.04093457356146,0.0783963
+820,Southeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,11.24264437272362,4.63531967780471,0.0007386
+821,Southeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,11.24264437272362,4.63531967780471,0.0007386
+822,Southeast,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,11.24264437272362,4.63531967780471,0.0007386
+823,South,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,16.015881828322073,9.369638827030805,0.0014928
+824,South,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,16.015881828322073,9.369638827030805,0.0014928
+825,South,FBFM5,GS2,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,16.015881828322073,9.369638827030805,0.0014928
+826,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,191.4200011100752,1619.606198650362,0.2580496
+827,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,191.4200011100752,1619.606198650362,0.2580496
+828,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,191.4200011100752,1619.606198650362,0.2580496
+829,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,134.3017937804222,172.36957822557582,0.0274635
+830,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,134.3017937804222,172.36957822557582,0.0274635
+831,South,FBFM10,TU5,1,Santa Lucia-Reliz association,Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,134.3017937804222,172.36957822557582,0.0274635
+832,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,165.77726919817647,1099.9839814318902,0.1752596
+833,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,165.77726919817647,1099.9839814318902,0.1752596
+834,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,165.77726919817647,1099.9839814318902,0.1752596
+835,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,216.46436883218823,931.1716169983965,0.1483635
+836,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,216.46436883218823,931.1716169983965,0.1483635
+837,South,FBFM10,TU5,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,216.46436883218823,931.1716169983965,0.1483635
+838,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,25.73352575323964,22.927382367900528,0.003653
+839,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,25.73352575323964,22.927382367900528,0.003653
+840,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,25.73352575323964,22.927382367900528,0.003653
+841,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,137.41370414346167,1262.5450741135344,0.2011611
+842,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,137.41370414346167,1262.5450741135344,0.2011611
+843,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,137.41370414346167,1262.5450741135344,0.2011611
+844,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,90.9011047084476,440.23304625574343,0.0701422
+845,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,90.9011047084476,440.23304625574343,0.0701422
+846,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Coastal Scrub,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,90.9011047084476,440.23304625574343,0.0701422
+847,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,132.6109149343046,1030.8128702674435,0.1642401
+848,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,132.6109149343046,1030.8128702674435,0.1642401
+849,South,FBFM5,GS2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,132.6109149343046,1030.8128702674435,0.1642401
+850,South,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,48.57627806578161,99.09393356191097,0.0157886
+851,South,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,48.57627806578161,99.09393356191097,0.0157886
+852,South,FBFM1,GR2,1,Santa Lucia-Reliz association,Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,48.57627806578161,99.09393356191097,0.0157886
+853,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Ambystoma californiense pop. 1,Watershed and Scenic Conservation,,SRA,Very High,217.3705855800231,1039.6419996810055,0.1656465
+854,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Rana draytonii,Watershed and Scenic Conservation,,SRA,Very High,217.3705855800231,1039.6419996810055,0.1656465
+855,South,FBFM1,GR2,1,"Santa Ynez fine sandy loam, 15 to 30 percent slopes",Annual Grassland,Taricha torosa,Watershed and Scenic Conservation,,SRA,Very High,217.3705855800231,1039.6419996810055,0.1656465
+</div>
+    </body>
+</html>
